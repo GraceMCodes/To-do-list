@@ -1,3 +1,5 @@
+const Sortable = require("./Sortable");
+
 let todo_wrapper =document.querySelector('.wrapper');
 let newTodo = document.querySelector('.todo_name');
 let addTodo = document.querySelector('.add_todo');
@@ -32,4 +34,7 @@ addTodo.addEventListener('click',()=>{
     }
     newTodo.value = '';
   }
+})
+new Sortable(todo_wrapper,{
+    animation : 300
 })
