@@ -29,7 +29,7 @@ body{
     align-items: center;
 }
 .wrapper{
-    width: 1000%;
+    width: 100%;
     height: 70%;
 overflow-x: hidden;
 overflow-y: auto;
