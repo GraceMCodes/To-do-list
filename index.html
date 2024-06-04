@@ -3,19 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-do-list</title>
     <link rel="stylesheet" href="styles.css" />
+    <title>Sortable Example</title>
   </head>
   <body>
     <div class="container">
-      <div class="todo-wrap">
-        <input type=" text" class="todo_name" />
-        <button class="add_todo">Add</button>
-        <div class="wrapper">
-        </div>
+    <div class="todo-wrap">
+      <input type=" text" class="todo_name" />
+      <button class="add_todo">Add</button>
+      <div class="wrapper">
       </div>
     </div>
-    <script src="Sortable.js"></script>
-    <script src="app.js"></script>
+  </div>
+
+    <script type="module">
+      import Sortable from "https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/modular/sortable.esm.js";
+
+      let todo_wrapper = document.querySelector(".wrapper");
+      let newTodo = document.querySelector(".todo_name");
+      let addTodo = document.querySelector(".add_todo");
+      let todo = [];
+      const el = document.querySelector(".wrapper");
+
+      Sortable.create(el, {
+        group: "el",
+        animation: 500,
+      });
+
+      addTodo.addEventListener("click", () => {
+        if (newTodo.value != "") {
+          todo.push(newTodo.value);
+
+          let newTodo_list = document.createElement("div");
+          newTodo_list.className = "item";
+          newTodo_list.innerHTML = newTodo.value;
+
+          let delete_todo = document.createElement("div");
+          delete_todo.className = "delete";
+          delete_todo.innerHTML = "X";
+          newTodo_list.appendChild(delete_todo);
+
+          delete_todo.addEventListener("click", () => {
+            todo_wrapper.removeChild(newTodo_list);
+          });
+
+          todo_wrapper.appendChild(newTodo_list);
+          newTodo.value = "";
+        }
+      });
+    </script>
   </body>
 </html>

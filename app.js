@@ -1,40 +1,36 @@
-const Sortable = require("./Sortable");
+// changed this script into the html script
 
-let todo_wrapper =document.querySelector('.wrapper');
-let newTodo = document.querySelector('.todo_name');
-let addTodo = document.querySelector('.add_todo');
+import Sortable from "sortablejs";
+let todo_wrapper = document.querySelector(".wrapper");
+let newTodo = document.querySelector(".todo_name");
+let addTodo = document.querySelector(".add_todo");
 let todo = [];
+const el = document.getElementsByClassName(".wrapper");
 
-addTodo.addEventListener('click',()=>{
-  if (newTodo.value != ""){
+Sortable.create(el, {
+  group: "el",
+  Animation: 500,
+});
+
+addTodo.addEventListener("click", () => {
+  if (newTodo.value != "") {
     todo.push(newTodo.value);
-    
-    let newTodo_list = document.createElement('div');
-    newTodo_list.className = 'item';
-
-    for(let i = 0; i < todo.length ; i++) {
-        newTodo_list.innerHTML = newTodo.value;
-        todo_wrapper.appendChild(newTodo_list);
-    }
-    if (todo.length > 0){
-        let item = document.querySelector('.item');
-        for(let j = 0; j < item.length; j++){
-            let delete_todo = document.createElement('div')
-                delete_todo.className = 'delete';
-                delete_todo.innerHTML = 'X';
-                item[j].appendChild(delete_todo)
-                
-
-                delete_todo.addEventListener('click', ()=>{
-                    todo_wrapper.removeChild(item[j]);
-                })
-
-
-        }
-    }
-    newTodo.value = '';
   }
-})
-new Sortable(todo_wrapper,{
-    animation : 300
-})
+
+  let newTodo_list = document.createElement("div");
+  newTodo_list.className = "item";
+  newTodo_list.innerHTML = newTodo.value;
+
+  let delete_todo = document.createElement("div");
+  delete_todo.className = "delete";
+  delete_todo.innerHTML = "X";
+  newTodo_list.appendChild(delete_todo);
+
+  delete_todo.addEventListener("click", () => {
+    todo_wrapper.removeChild(newTodo_list);
+  });
+
+  todo_wrapper.appendChild(newTodo_list);
+
+  newTodo.value = "";
+});

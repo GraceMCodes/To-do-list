@@ -28,7 +28,7 @@ body{
     flex-direction: column;
     align-items: center;
 }
-.Wrapper{
+.wrapper{
     width: 1000%;
     height: 70%;
 overflow-x: hidden;
